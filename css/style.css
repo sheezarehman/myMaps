@@ -5,4 +5,12 @@
 body{
 	background-image: url(../bg.jpg);
 	background-position: center;
+    text-align: center;
+}
+.form-inline{
+    color: sandybrown;
+    margin:10px;
+}
+.form-control{
+    margin:10px;
 }
