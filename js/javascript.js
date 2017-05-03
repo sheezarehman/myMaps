@@ -1,22 +1,17 @@
 console.log("tada");
 
 function initMap() {
-    if (urlParam('start') != '') {  // variable_name would be the name of your variable within your url following the ? symbol
-
-        var uluru = {lat: 48.85 , lng: 2.3};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru,
-            fullscreenControl: true
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
+    if (urlParam('start') != '' || urlParam('start2') != ''&& urlParam('end') != '' || urlParam('end2') != '' ) {
+        direction();
     } else {//general
-
+        console.log('get not present');
         general();
     }
+}
+
+//if both set then this is call toi get path from start to end
+function direction(){
+
 }
 
 
@@ -27,6 +22,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+// geolocatisation function called if nothing in get
 var map, infoWindow;
 function general() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -56,6 +53,26 @@ function general() {
     }
 }
 
+//form validation 
+function formcheck() {
+    var start=document.getElementById('start').value;
+    var start2=document.getElementById('start2').checked;
+    var end=document.getElementById('end').value;
+    var end2=document.getElementById('end2').checked;
+    
+    
+}
+
+
+
+
+
+//to reset url
+function reset(){
+    window.location.href =  window.location.href.split("?")[0];
+}
+
+//my url checking function
 function urlParam(name){
     if(new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href) !== null ){
         var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -64,11 +81,13 @@ function urlParam(name){
     return false;
     // return true;
 }
-window.onload = function() {
 
-    if (urlParam('start') != '') {  // variable_name would be the name of your variable within your url following the ? symbol
-        //
-    } else {
-        general();
-    }
-};
+
+// window.onload = function() {
+//
+//     if (urlParam('start') != '') {  // variable_name would be the name of your variable within your url following the ? symbol
+//         //
+//     } else {
+//         general();
+//     }
+// };

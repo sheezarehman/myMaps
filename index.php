@@ -7,21 +7,23 @@
   <body>
     <h3>My Google Maps Demo</h3>
     <div class="right">
-        <form action="" method="GET" class="form-inline">
+        <form action="" method="GET" class="form-inline" onsubmit=" return formcheck()">
             <div class="form-group">
                 <label for="start">Départ:</label>
                 <input type="text" name="start" class="form-control" id="start">
-                <label for="start2"><input type="checkbox">current location</label>
+                <label for="start2"><input type="checkbox" name="start2" id="start2">current location</label>
             </div>
             <br>
             <div class="form-group">
                 <label for="end">Arrivée:</label>
                 <input type="text" name="end" class="form-control" id="end">
-                <label for="end2"><input type="checkbox">current location</label>
+                <label for="end2"><input type="checkbox" name="end2" id="end2">current location</label>
             </div>
             <br>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
+
+        <button onclick="reset()"> RESET</button>
     </div>
     <div id="map"></div>
     <script src="js/javascript.js"></script>

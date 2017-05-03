@@ -1,6 +1,7 @@
 #map {
     width: 800px;
     height: 600px;
+    margin: auto;
 }
 body{
 	background-image: url(../bg.jpg);
