@@ -7,7 +7,7 @@
   <body>
     <h3>My Google Maps Demo</h3>
     <div class="right">
-        <form action="" method="GET" class="form-inline" onsubmit=" return formcheck()">
+        <form action="" method="GET" class="form-inline" onsubmit="return formcheck()">
             <div class="form-group">
                 <label for="start">Départ:</label>
                 <input type="text" name="start" class="form-control" id="start">
