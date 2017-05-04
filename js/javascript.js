@@ -79,6 +79,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay ,map ) {
     }, function(response, status) {
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
+            directionsDisplay.setPanel(document.getElementById('path'));
             //CLICK
             var bounds = response.routes[0].bounds;
             map.fitBounds(bounds);

@@ -26,6 +26,7 @@
         <button onclick="reset()"> RESET</button>
     </div>
     <div id="map"></div>
+    <div id="path"></div>
     <script src="js/javascript.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ulqiypfh1h1_4llCrZgcvhf5LDns27c&libraries=places&callback=initMap">
