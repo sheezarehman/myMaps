@@ -83,18 +83,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay ,map ) {
             var bounds = response.routes[0].bounds;
             map.fitBounds(bounds);
             map.setCenter(bounds.getCenter());
-            var geocoder = new google.maps.Geocoder();
-            google.maps.event.addListener(map, 'click', function(event) {
-                geocoder.geocode({
-                    'latLng': event.latLng
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            alert(results[0].formatted_address);
-                        }
-                    }
-                });
-            });
+            clickMap(map);
         } else {
             general();
             window.alert('Directions request failed due to ' + status);
@@ -178,22 +167,8 @@ function general() {
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
-//AUTOCOMPLETE
     autocomplete(map);
-
-//    CLICK
-    var geocoder = new google.maps.Geocoder();
-    google.maps.event.addListener(map, 'click', function(event) {
-        geocoder.geocode({
-            'latLng': event.latLng
-        }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    alert(results[0].formatted_address);
-                }
-            }
-        });
-    });
+    clickMap(map);
 }
 
 //form validation 
@@ -216,7 +191,7 @@ function formcheck() {
 
 }
 
-
+//autocomplete
 function autocomplete(map) {
 
     var starting = /** @type {!HTMLInputElement} */(
@@ -231,12 +206,23 @@ function autocomplete(map) {
     autocomplete2.bindTo('bounds', map);
     autocomplete2.setTypes([]);
 
-
-
-
-
 }
 
+//    CLICK
+function clickMap(map){
+    var geocoder = new google.maps.Geocoder();
+    google.maps.event.addListener(map, 'click', function(event) {
+        geocoder.geocode({
+            'latLng': event.latLng
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    alert(results[0].formatted_address);
+                }
+            }
+        });
+    });
+}
 
 //to reset url
 function reset(){
