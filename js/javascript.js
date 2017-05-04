@@ -1,6 +1,6 @@
 var points;
 function initMap() {
-    if (urlParam('start') != '' || urlParam('start2') != ''&& urlParam('end') != '' || urlParam('end2') != '' ) {
+       if (urlParam('start') != '' || urlParam('start2') != ''&& urlParam('end') != '' || urlParam('end2') != '' ) {
         if(urlParam('start') == '' && urlParam('end') == ''){
             console.log("start and end not definned 1111 ")
             if (urlParam('start') != '') {
@@ -12,7 +12,6 @@ function initMap() {
                 console.log(points);
                 start = points;
             }
-            console.log(start);
 
             if (urlParam('end') != '') {
                 end = urlParam('end');
@@ -152,6 +151,19 @@ function general() {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
+
+    //AUTOCOMPLETE
+    var starting = /** @type {!HTMLInputElement} */(
+        document.getElementById('start'));
+    var autocomplete1 = new google.maps.places.Autocomplete(starting);
+    autocomplete1.bindTo('bounds', map);
+    autocomplete1.setTypes([]);
+
+    var ending = /** @type {!HTMLInputElement} */(
+        document.getElementById('end'));
+    var autocomplete2 = new google.maps.places.Autocomplete(ending);
+    autocomplete2.bindTo('bounds', map);
+    autocomplete2.setTypes([]);
 }
 
 //form validation 
@@ -162,10 +174,14 @@ function formcheck() {
     var to =document.getElementById('end').value;
     var to2=document.getElementById('end2').checked;
 
-    if( from !== null ||  from2 !== false && to !== null || to2 !== false && !(from2 == true && to2 == true )){
+    if( (from !== null ||  from2 !== false) && (to !== null || to2 !== false ) && !(from2 == true && to2 == true ) && (from2!== to2  && from2 == true)){
         return true;
     }
-    alert("please fill a starting and ending point!")
+    alert("please fill a starting and ending point!");
+    console.log(from);
+    console.log(from2);
+    console.log(to);
+    console.log(to2);
     return false;
 
 }
@@ -188,6 +204,8 @@ function urlParam(name){
     return false;
     // return true;
 }
+
+
 
 
 // window.onload = function() {

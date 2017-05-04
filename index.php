@@ -9,14 +9,14 @@
     <div class="right">
         <form action="" method="GET" class="form-inline" onsubmit="return formcheck()">
             <div class="form-group">
-                <label for="start">Départ:</label>
-                <input type="text" name="start" class="form-control" id="start">
+                <label for="start" >Départ:</label>
+                <input type="text"  name="start" class="form-control" id="start">
                 <label for="start2"><input type="checkbox" name="start2" id="start2">current location</label>
             </div>
             <br>
             <div class="form-group">
                 <label for="end">Arrivée:</label>
-                <input type="text" name="end" class="form-control" id="end">
+                <input type="text" name="end"  class="form-control" id="end">
                 <label for="end2"><input type="checkbox" name="end2" id="end2">current location</label>
             </div>
             <br>
@@ -28,7 +28,8 @@
     <div id="map"></div>
     <script src="js/javascript.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ulqiypfh1h1_4llCrZgcvhf5LDns27c&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ulqiypfh1h1_4llCrZgcvhf5LDns27c&libraries=places&callback=initMap">
     </script>
+<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ulqiypfh1h1_4llCrZgcvhf5LDns27c&libraries=places"></script>-->
   </body>
 </html>
