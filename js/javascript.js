@@ -1,5 +1,6 @@
 var points;
 function initMap() {
+
        if (urlParam('start') != '' || urlParam('start2') != ''&& urlParam('end') != '' || urlParam('end2') != '' ) {
         if(urlParam('start') !== '' || urlParam('end') !== ''){
             console.log("start and end not definned 1111 ")
@@ -55,28 +56,20 @@ function direction(){
         center: {lat: 41.85, lng: -87.65}
     });
     directionsDisplay.setMap(map);
-    onChangeHandler();
+    onChangeHandler( map);
 
     //AUTOCOMPLETE
-    var starting = /** @type {!HTMLInputElement} */(
-        document.getElementById('start'));
-    var autocomplete1 = new google.maps.places.Autocomplete(starting);
-    autocomplete1.bindTo('bounds', map);
-    autocomplete1.setTypes([]);
+    autocomplete(map);
 
-    var ending = /** @type {!HTMLInputElement} */(
-        document.getElementById('end'));
-    var autocomplete2 = new google.maps.places.Autocomplete(ending);
-    autocomplete2.bindTo('bounds', map);
-    autocomplete2.setTypes([]);
+
 }
 
-function onChangeHandler() {
-    calculateAndDisplayRoute(directionsService, directionsDisplay);
+function onChangeHandler(map) {
+    calculateAndDisplayRoute(directionsService, directionsDisplay , map);
 };
 
 
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay ,map ) {
     console.log(start);
     console.log(end);
     directionsService.route({
@@ -86,11 +79,31 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }, function(response, status) {
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
+            //CLICK
+            var bounds = response.routes[0].bounds;
+            map.fitBounds(bounds);
+            map.setCenter(bounds.getCenter());
+            var geocoder = new google.maps.Geocoder();
+            google.maps.event.addListener(map, 'click', function(event) {
+                geocoder.geocode({
+                    'latLng': event.latLng
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            alert(results[0].formatted_address);
+                        }
+                    }
+                });
+            });
         } else {
+            general();
             window.alert('Directions request failed due to ' + status);
         }
     });
+    //click
 }
+
+
 // Try HTML5 geolocation.
 var map, infoWindow;
 function mylocation( when){
@@ -140,7 +153,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 var map, infoWindow;
 function general() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: -100.397, lng: 150.644},
         zoom: 6
     });
     infoWindow = new google.maps.InfoWindow;
@@ -166,17 +179,21 @@ function general() {
     }
 
 //AUTOCOMPLETE
-    var starting = /** @type {!HTMLInputElement} */(
-        document.getElementById('start'));
-    var autocomplete1 = new google.maps.places.Autocomplete(starting);
-    autocomplete1.bindTo('bounds', map);
-    autocomplete1.setTypes([]);
+    autocomplete(map);
 
-    var ending = /** @type {!HTMLInputElement} */(
-        document.getElementById('end'));
-    var autocomplete2 = new google.maps.places.Autocomplete(ending);
-    autocomplete2.bindTo('bounds', map);
-    autocomplete2.setTypes([]);
+//    CLICK
+    var geocoder = new google.maps.Geocoder();
+    google.maps.event.addListener(map, 'click', function(event) {
+        geocoder.geocode({
+            'latLng': event.latLng
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    alert(results[0].formatted_address);
+                }
+            }
+        });
+    });
 }
 
 //form validation 
@@ -200,7 +217,25 @@ function formcheck() {
 }
 
 
+function autocomplete(map) {
 
+    var starting = /** @type {!HTMLInputElement} */(
+        document.getElementById('start'));
+    var autocomplete1 = new google.maps.places.Autocomplete(starting);
+    autocomplete1.bindTo('bounds', map);
+    autocomplete1.setTypes([]);
+
+    var ending = /** @type {!HTMLInputElement} */(
+        document.getElementById('end'));
+    var autocomplete2 = new google.maps.places.Autocomplete(ending);
+    autocomplete2.bindTo('bounds', map);
+    autocomplete2.setTypes([]);
+
+
+
+
+
+}
 
 
 //to reset url
