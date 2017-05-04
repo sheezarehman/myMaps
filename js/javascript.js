@@ -208,17 +208,31 @@ function autocomplete(map) {
 
 }
 
+var lastactive;
+
+function setId(id) {
+    lastactive = id;
+}
 //    CLICK
 function clickMap(map){
     var geocoder = new google.maps.Geocoder();
+
     google.maps.event.addListener(map, 'click', function(event) {
         geocoder.geocode({
             'latLng': event.latLng
         }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
-                    alert(results[0].formatted_address);
+                    var input1 = document.getElementById("start");
+                    var input2 = document.getElementById("end");
+
+                    if(lastactive == null  || lastactive== "start"){
+                        input1.value=results[0].formatted_address;
+                    }else if(lastactive == "end" ){
+                        input2.value=results[0].formatted_address;
+                    }
                 }
+
             }
         });
     });

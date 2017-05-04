@@ -10,13 +10,13 @@
         <form action="" method="GET" class="form-inline" onsubmit="return formcheck()">
             <div class="form-group">
                 <label for="start" >Départ:</label>
-                <input type="text"  name="start" class="form-control" id="start">
+                <input type="text"  name="start" class="form-control" id="start" onBlur="setId(this.id)">
                 <label for="start2"><input type="checkbox" name="start2" id="start2">current location</label>
             </div>
             <br>
             <div class="form-group">
                 <label for="end">Arrivée:</label>
-                <input type="text" name="end"  class="form-control" id="end">
+                <input type="text" name="end"  class="form-control" id="end" onBlur="setId(this.id)">
                 <label for="end2"><input type="checkbox" name="end2" id="end2">current location</label>
             </div>
             <br>
