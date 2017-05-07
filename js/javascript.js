@@ -138,12 +138,10 @@ function places(path  , directionsService, directionsDisplay ,map){
                 };
                 used(results[listing].name);
             }
-            // console.log(locate);
             waypoints.push({
                 location: locate ,
                 stopover: true,
             });
-
         });
     });
 
